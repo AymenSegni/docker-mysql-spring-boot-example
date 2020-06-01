@@ -6,7 +6,6 @@ variables:
   DOCKER_HOST: tcp://localhost:2375
   IMAGE_VERSION: v0.0.1
 
-
 services:
   - docker:dind
 
@@ -32,12 +31,11 @@ docker-build:
     - docker push aymensegni/users-mysql:${IMAGE_VERSION
 
 # Reference link why kube-env wont show up without env:
-  # https://stackoverflow.com/questions/44026971/gitlab-ci-kubernetes-variables-arent-set/44059197#44059197
+# https://stackoverflow.com/questions/44026971/gitlab-ci-kubernetes-variables-arent-set/44059197#44059197
 
 deploy-helm:
   stage: deploy
   image: dtzar/helm-kubectl
-  environment: production
+  environment: dev
   script:
     - kubectl apply -f k8s-deployment/
-    - # WIP  helm template ./helm_deployment/springboot --set image.tag=${CI_COMMIT_SHORT_SHA}| kubectl apply -f -
