@@ -35,7 +35,6 @@ docker-build:
 
 deploy-helm:
   stage: deploy
-  image: dtzar/helm-kubectl
   environment: dev
   script:
     - kubectl apply -f k8s-deployment/
